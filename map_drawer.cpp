@@ -2,10 +2,11 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 #include <QtGui/QApplication>
-#include "draw_map.h"
+#include "map_drawer.h"
 
-void SimpleDraw::draw(Map *map, int argv, char **args) {
-  QApplication app(argv, args);
+void SimpleDrawer::draw(Map *map) {
+  int argv = 0;
+  QApplication app(argv, NULL);
   QImage *Image = new QImage(200, 200, QImage::Format_RGB444);
   QBrush baseBrush(Qt::white, Qt::SolidPattern);
   QPainter painter(Image);
@@ -15,8 +16,8 @@ void SimpleDraw::draw(Map *map, int argv, char **args) {
   painter.setBrush(Qt::white);
   painter.setPen(Qt::black);
 
-  QString text = map->map()->text().c_str();
-  QFont font("Arial", 20);
+  QString text = map->root()->text().c_str();
+  QFont font("Arial", 25);
   QFontMetrics font_metrics(font);
   int font_width = font_metrics.averageCharWidth();
   int font_height = font_metrics.height();
@@ -33,3 +34,13 @@ void SimpleDraw::draw(Map *map, int argv, char **args) {
   delete Image; 
 }
 
+int FreeMindDrawer::x_step = 15;
+
+void FreeMindDrawer::draw(Map *map) {
+  
+}
+
+int FreeMindDrawer::lay_out(MapNode *node) {
+  
+  return 0;
+}

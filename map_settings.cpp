@@ -25,6 +25,3 @@ MapSettings *MapSettings::get_map_settings() {
   return map_settings_;
 }
 
-std::string MapSettings::file_format() {
-  return "png";
-}

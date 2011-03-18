@@ -1,36 +1,48 @@
-#ifndef MIND_MAP_H_
-#define MIND_MAP_H_
-
+#pragma once
 #include <string>
 #include <vector>
+
+enum NodePosition {
+  NONE,
+  RIGHT,
+  LEFT,
+};
+
+struct Point {
+  int x;
+  int y;
+};
 
 class MapNode {
  public: 
   MapNode();
   ~MapNode();
+
   std::string text() const;
-  MapNode *child(size_t i) const;
-  size_t children_number() const;
-  void set_text(std::string text);
-  void add_child(MapNode* child);
- private:
+  std::vector<const MapNode*> children() const;  
+  NodePosition position() const;
+  Point coordinates() const;
+
+  void set_position(NodePosition position);
+  void set_coordinates(Point coordinates);
+
+ protected:
   std::string text_;
+  NodePosition position_;
+  Point coordinates_;
   std::vector<MapNode*> children_;
 };
 
 class Map {
- public:
+ protected:
   Map();
-  Map(MapNode *map);
+ public:
   ~Map();
-  MapNode *map() const;
-  void set_map(MapNode *map);
+  MapNode *root() const;
   void print();
- private:
-  MapNode *map_;
+
+ protected:
+  void print_node(MapNode const *node, size_t indent);
+
+  MapNode *root_;
 };
-
-//MapNode* LoadFromXMLFile(char const *file_name);
-//void PrintMap(MapNode *node);
-
-#endif

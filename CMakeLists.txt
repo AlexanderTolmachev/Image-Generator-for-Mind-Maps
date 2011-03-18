@@ -4,25 +4,40 @@ set (project ImgGenMM)
 
 set (HEADERS
 	mind_map.h
-	load_map.h
+	map_loader.h
 	map_settings.h
-	draw_map.h
+	map_drawer.h
 	lib/pugixml.hpp
 	lib/pugiconfig.hpp)
 
 set (SOURCES
 	mind_map.cpp
-	load_map.cpp
+	map_loader.cpp
 	map_settings.cpp
-	draw_map.cpp
+	map_drawer.cpp
 	lib/pugixml.cpp	
 	main.cpp)
 
 project ($(PROJECT))
 
-find_package (Qt4 REQUIRED)
-include (${QT_USE_FILE})
-qt4_wrap_cpp (MOC_SOURCES ${HEADERS})
+include_directories (D:/Программы/Qt/4.7.2l/ib/)
+
+set (LIBRARIES
+	QtGui4.lib
+	QtCore4.lib)
+
+foreach (LIBRARY ${LIBRARIES})
+	add_subdirectory (${LIBRARY}/build bin/${LIBRARY})
+endforeach ()
+
+set (QT_HEADERS
+	D:/Программы/Qt/4.7.2/include/QtGui/qimage.h
+	D:/Программы/Qt/4.7.2/include/QtGui/qbrush.h
+	D:/Программы/Qt/4.7.2/include/QtGui/qpainter.h
+	D:/Программы/Qt/4.7.2/include/QtGui/qapplication.h)
+
+source_group ("Header Files" FILES ${HEADERS})
+source_group ("Source Files" FILES ${SOURCES})
 
 if (MSVC)
 	add_definitions (/W3)
@@ -33,6 +48,6 @@ else ()
 endif ()
 
 
-add_executable (${PROJECT} ${HEADERS} ${SOURCES} ${MOC_SOURCES})
+add_executable (${PROJECT} ${HEADERS} ${SOURCES} ${QT_HEADERS})
  
-target_link_libraries (${PROJECT} ${QT_LIBRARIES})
+target_link_libraries (${PROJECT} ${LIBRARIES})

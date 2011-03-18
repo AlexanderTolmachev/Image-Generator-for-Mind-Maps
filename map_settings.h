@@ -1,6 +1,4 @@
-#ifndef MAP_SETTINGS_
-#define MAP_SETTINGS_
-
+#pragma once
 #include <string>
 
 class MapSettingsDeleter {
@@ -15,6 +13,7 @@ class MapSettings {
   MapSettings(MapSettings const &settings);
   ~MapSettings();
   MapSettings &operator = (MapSettings const &settings);
+
  public:
   static MapSettings *get_map_settings();
   std::string file_format();
@@ -24,5 +23,3 @@ class MapSettings {
   static MapSettingsDeleter deleter_;
   friend class MapSettingsDeleter;
 };
-
-#endif
