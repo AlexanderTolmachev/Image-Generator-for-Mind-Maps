@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 
-set (project ImgGenMM)
+set (PROJECT 
+	ImgGenMM)
 
 set (HEADERS
 	mind_map.h
@@ -18,17 +19,13 @@ set (SOURCES
 	lib/pugixml.cpp	
 	main.cpp)
 
-project ($(PROJECT))
+project (${PROJECT})
 
-include_directories (D:/Программы/Qt/4.7.2l/ib/)
+include_directories (D:/Программы/Qt/4.7.2/lib/)
 
 set (LIBRARIES
 	QtGui4.lib
 	QtCore4.lib)
-
-foreach (LIBRARY ${LIBRARIES})
-	add_subdirectory (${LIBRARY}/build bin/${LIBRARY})
-endforeach ()
 
 set (QT_HEADERS
 	D:/Программы/Qt/4.7.2/include/QtGui/qimage.h
