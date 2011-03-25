@@ -7,22 +7,6 @@
 using namespace std;
 
 int main() {
-/*  Map *map = NULL;
-  LoadMap *loader = new LoadFromXML;
-  DrawMap *drawer = new SimpleDraw;
-
-  cout << "Enter file name:" << endl;
-  string file_name;
-  cin >> file_name;
-
-  map = loader->load(file_name);
-  map->print();
-  drawer->draw(map, argv, args);
-
-  delete map;
-  delete loader;
-*/
-
   Map *map = NULL;
   MapLoader *map_xml_loader = new XMLLoader();
 
@@ -36,7 +20,8 @@ int main() {
   }
   map->print();
 
-  MapDrawer *map_drawer = new SimpleDrawer();
+  int argc = 0;
+  MapDrawer *map_drawer = new FreeMindDrawer(argc, NULL);
 
   map_drawer->draw(map);
 

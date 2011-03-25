@@ -8,29 +8,20 @@ enum NodePosition {
   LEFT,
 };
 
-struct Point {
-  int x;
-  int y;
-};
-
 class MapNode {
  public: 
   MapNode();
   ~MapNode();
 
   std::string text() const;
-  std::vector<const MapNode*> children() const;  
+  std::vector<const MapNode *> children() const;  
   NodePosition position() const;
-  Point coordinates() const;
 
   void set_position(NodePosition position);
-  void set_coordinates(Point coordinates);
-
  protected:
   std::string text_;
   NodePosition position_;
-  Point coordinates_;
-  std::vector<MapNode*> children_;
+  std::vector<MapNode *> children_;
 };
 
 class Map {
@@ -38,7 +29,7 @@ class Map {
   Map();
  public:
   ~Map();
-  MapNode *root() const;
+  const MapNode *root() const;
   void print();
 
  protected:
