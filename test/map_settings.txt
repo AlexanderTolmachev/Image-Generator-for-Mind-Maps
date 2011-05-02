@@ -1,7 +1,7 @@
 MapSettings
 {
-	OutputFileName test_map_linear_curved.txt
-	OutputFileFormat TIFF
+	OutputFileName test_map_linear_curved.png
+	OutputFileFormat PNG
 	NodeStyle LINEAR
 	EdgeStyle CURVED
 }
