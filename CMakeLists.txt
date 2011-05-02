@@ -22,16 +22,12 @@ set (SOURCES
 project (${PROJECT})
 
 include_directories (D:/Программы/Qt/4.7.2/lib/)
+include_directories (D:/Программы/Qt/4.7.2/include/)
+include_directories (C:/Program Files/boost/boost_1_46_1/)
 
 set (LIBRARIES
 	QtGui4.lib
 	QtCore4.lib)
-
-set (QT_HEADERS
-	D:/Программы/Qt/4.7.2/include/QtGui/qimage.h
-	D:/Программы/Qt/4.7.2/include/QtGui/qbrush.h
-	D:/Программы/Qt/4.7.2/include/QtGui/qpainter.h
-	D:/Программы/Qt/4.7.2/include/QtGui/qapplication.h)
 
 source_group ("Header Files" FILES ${HEADERS})
 source_group ("Source Files" FILES ${SOURCES})
@@ -45,6 +41,6 @@ else ()
 endif ()
 
 
-add_executable (${PROJECT} ${HEADERS} ${SOURCES} ${QT_HEADERS})
+add_executable (${PROJECT} ${HEADERS} ${SOURCES})
  
 target_link_libraries (${PROJECT} ${LIBRARIES})

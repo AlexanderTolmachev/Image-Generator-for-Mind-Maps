@@ -15,6 +15,41 @@ std::string MapNode::text() const {
   return text_;
 }
 
+std::string MapNode::id() const {
+  return id_;
+}
+
+NodePosition MapNode::position() const {
+  if (position_ == NONE) {
+    return parent_->position(); 
+  }
+  return position_;
+}
+
+NodeTextFont MapNode::font() const {
+  return font_;
+}
+
+std::string MapNode::text_color() const {
+  return text_color_;
+}
+
+std::string MapNode::background_color() const {
+  return background_color_;
+}
+
+std::vector<std::string> MapNode::icons() const {
+  return icons_;
+}
+
+std::vector<ArrowLink> MapNode::arrow_links() const {
+  return arrow_links_;
+}
+
+const MapNode *MapNode::parent() const {
+  return parent_;
+}
+
 std::vector<const MapNode*> MapNode::children() const {
   std::vector<const MapNode*> children_collection;
   std::vector<MapNode*>::const_iterator children_iterator = children_.begin();
@@ -22,14 +57,6 @@ std::vector<const MapNode*> MapNode::children() const {
     children_collection.push_back(*children_iterator);
   }
   return children_collection;
-}
-
-NodePosition MapNode::position() const {
-  return position_;
-}
-
-void MapNode::set_position(NodePosition position) {
-  position_ = position;
 }
 
 //           Map            //
@@ -44,6 +71,10 @@ const MapNode *Map::root() const {
   return root_;
 }
 
+const MapNode *Map::find_node_by_id(const std::string &node_id) const {
+  return find_node(root_, node_id);
+}
+
 void Map::print() {
   if (root_ == NULL) {
     return;
@@ -51,7 +82,7 @@ void Map::print() {
   print_node(root_, 0);
 }
 
-void Map::print_node(MapNode const *node, size_t indent) {
+void Map::print_node(MapNode const *node, size_t indent) const {
   if (node == NULL) {
     return;
   }
@@ -64,4 +95,22 @@ void Map::print_node(MapNode const *node, size_t indent) {
   for ( ; child != children.end(); ++child) {
     print_node(*child, indent + 1);
   }
+}
+
+const MapNode *Map::find_node(const MapNode *node, const std::string &node_id) const {
+  if (node->id() == node_id) {
+    return node;
+  }
+  std::vector<const MapNode *> children = node->children();
+  if (children.empty()) {
+    return NULL;
+  }
+  std::vector<const MapNode *>::const_iterator child = children.begin();
+  for ( ; child != children.end(); ++child) {
+    const MapNode *node = find_node(*child, node_id); 
+    if (node != NULL) {
+      return node;
+    }
+  }
+  return NULL;
 }

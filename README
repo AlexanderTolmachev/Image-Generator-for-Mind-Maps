@@ -1,2 +1,14 @@
 You may build this project with the help of CMake (CMakeLists.txt file is inclued).
-Pay attantion that this project uses additional free libraries: pugixml library and Qt graphics library. Pugixml files are situated in /lib directory. You may also download then from the official sourse: http://pugixml.org. But you need Qt have been instulled on your computer. You may download it from here: http://qt.nokia.com. You also have to change paths to conformable Qt .lib (.a) files and headers on your computer in CMakeLists.txt file before building.
+Pay attantion that this project uses additional free libraries: pugixml library, Qt graphics library and boost property tree library. Pugixml files are situated in /lib directory. You may also download then from the official sourse: http://pugixml.org. But you need Qt have been instulled on your computer. You may download it from here: http://qt.nokia.com. Boost library is available here: http://www.boost.org. You also have to change paths to conformable Qt .lib (.a) files and all header files, that are used in this project in CMakeLists.txt file before building.
+After building run the project with the command prompt. You need to specify a path to .mm file and a path to a file with map drawing settings as command prompt parametrs. It should be like this: 
+ImgGenMM.exe test/Test_map.mm test/map_settings.txt
+The format of file with drawing settings is the following:
+MapSettings
+{
+	OutputFileName test_map.png
+	OutputFileFormat PNG
+	NodeStyle LINEAR
+	EdgeStyle CURVED
+}
+The "NodeStyle" field may have a value "LINEAR" or "BUBBLE" and the "EdgeStyle" style filed may have a value "CURVED" or "STRAIGHT". Supported output file formats are "BMP", "JPG", "JPEG", "PNG", "TIFF", "PPM", "XBM" and "XPM".
+You may see some example images in "example_images" directory. Test .mm file and file with map drawing settings are avaliable in "test" directory.
